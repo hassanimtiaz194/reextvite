@@ -1,0 +1,200 @@
+#root {
+  background: #fefcfb;
+}
+
+.rootContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  align-items: center;
+  height: 100vh;
+}
+
+.mainOtherContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.reextForm {
+  background: #fefcfb;
+}
+
+.reextTable .x-panel-header {
+  border: 1px solid #000;
+  background: #333;
+  background-image: none;
+  color: white;
+}
+.reextTable .x-title {
+  background: #333;
+  background-image: none;
+  color: white;
+}
+.reextTable .x-panel-body {
+  border: 1px solid #000;
+  background: #fefcfb;
+  background-image: none;
+  padding: 0px !important;
+}
+
+.reextForm .x-panel-header,
+.reextForm .x-panel-body {
+  border: none;
+  background: #fefcfb;
+  background-image: none;
+}
+
+.reextForm .x-panel-header {
+  height: 35px;
+}
+
+.reextForm .x-panel-header-default-top {
+  box-shadow: none;
+}
+
+.reextForm .x-panel-header-title-default {
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.reextFilter .x-panel-header-title-default {
+  text-align: left !important;
+}
+
+.reextForm a {
+  width: 100%;
+  left: 0 !important;
+  background-color: black;
+  background-image: none;
+  min-height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.reextForm a span {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reextForm .x-autocontainer-innerCt {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reextForm label {
+  color: black;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reextForm .x-form-text-wrap-default,
+.reextForm .input {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.loginContainer,
+.signupContainer,
+.itemContainer {
+  margin-top: 10em;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 30px;
+  width: 50%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.allInventoryContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.filterContainer {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 30px;
+  width: 20%;
+  height: 200px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cardTitle .x-form-display-field-default {
+  font-size: 16px;
+  font-weight: 800;
+}
+.cardPrice .x-form-display-field-default {
+  font-size: 19px;
+  font-weight: 800;
+}
+.cardCategory .x-form-display-field-default {
+  font-size: 12px;
+  font-weight: 200;
+}
+.cardDescription .x-form-display-field-default {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.userContainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row-reverse;
+  padding: 10px 10px 120px 10px;
+}
+.chartContainer {
+  width: 300;
+  height: 400;
+}
+
+.signout-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.signout-btn:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .loginContainer,
+  .signupContainer,
+  .itemContainer {
+    margin-top: 10em;
+    width: 80%;
+    padding: 20px;
+  }
+  .allInventoryContainer {
+    flex-direction: column;
+  }
+  .filterContainer {
+    width: 80%;
+  }
+  .userContainer {
+    flex-direction: column;
+    padding: 10px 10px 100px 10px;
+  }
+}
