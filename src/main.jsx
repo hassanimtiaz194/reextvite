@@ -24,7 +24,7 @@ var ReExtData = {
   },
   rtl: false,
   locale: "en",
-  debug: false,
+  debug: true,
   urlbase: "./",
   location: "remote",
   overrides: false,
@@ -33,7 +33,7 @@ reactroot.render(
   <React.StrictMode>
     <ReExtProvider
       ReExtData={ReExtData}
-      splash={true}
+      splash={false}
       reextkey={
         "TU5RRGZrek9nUXUyNHVvUExOTHZLTk9iT2tCMXBNM1JGUFNkdW95SFgydS45ZEROeUlUT3lZRE4zRWpPaUFIZWxKQ0xpTTNhd3AzTWxwMloxQUhOM2RYWWxwbmJ3Z0dOaGxYY3FGRE1mUldhc0ppT2lJV2R6SnllLjlKaU4xSXpVSUppT2ljR2JoSnll"
       }
