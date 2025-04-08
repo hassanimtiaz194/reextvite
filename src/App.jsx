@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import AddItems from "./pages/AddItems";
 import AdminRoute from "./AdminRoute";
 import Signup from "./pages/Signup";
-import Users from "./pages/users";
+import Users from "./pages/Users";
 import Inventory from "./pages/Inventory";
 import AllInventory from "./pages/AllInventory";
 import Navbar from "./components/Navbar";
