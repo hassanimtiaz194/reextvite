@@ -15,7 +15,7 @@ import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
 
 function AppContent() {
-  const location = useLocation(); // ✅ reactive location hook
+  const location = useLocation();
   const [isHome, setIsHome] = useState(false);
 
   useEffect(() => {
