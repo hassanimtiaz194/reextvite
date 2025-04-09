@@ -1,3 +1,5 @@
+window.__IS_REEXT_RUNNING__ = true;
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Fill, ReExtProvider } from "@sencha/reext";
