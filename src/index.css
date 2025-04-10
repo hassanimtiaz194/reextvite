@@ -1,5 +1,5 @@
 #root {
-  background: #fefcfb;
+  background-image: linear-gradient(180deg, #dfedf0, #e6dada);
 }
 
 .rootContainer {
@@ -14,7 +14,11 @@
   padding: 20px;
   overflow-y: auto;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 140px);
+}
+
+.reextChart   .x-panel-body-default {
+  border: none;
 }
 
 .mainOtherContainer {
@@ -29,33 +33,56 @@
   background: #fefcfb;
 }
 
+.reextChart .x-panel-header {
+  display: none;
+}
+
+.normalContainer {
+  border-radius: 8px;
+  padding-bottom: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 10px;
+}
+
 .reextTable .x-panel-header {
-  border: 1px solid #000;
-  background: #333;
-  background-image: none;
-  color: white;
+  background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px
 }
 .reextTable .x-title {
-  background: #333;
   background-image: none;
   color: white;
 }
 .reextTable .x-panel-body {
-  border: 1px solid #000;
+  height: 100%;
+  border: transparent;
   background: #fefcfb;
   background-image: none;
   padding: 0px !important;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px
 }
-
-.reextForm .x-panel-header,
-.reextForm .x-panel-body {
-  border: none;
-  background: #fefcfb;
-  background-image: none;
+.reextForm {
+  border-radius: 8px;
 }
 
 .reextForm .x-panel-header {
-  height: 35px;
+  background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
+  height: 300px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.reextForm .x-panel-body {
+  border: none;
+  background: white;
+  background-image: none;
+  padding-top: 13px !important;
+}
+
+.reextForm .x-panel-header {
+  height: 50px;
 }
 
 .reextForm .x-panel-header-default-top {
@@ -63,10 +90,11 @@
 }
 
 .reextForm .x-panel-header-title-default {
-  color: black;
+  color: white;
   font-size: 20px;
   text-align: center;
   line-height: 24px;
+  padding-top: 8px;
 }
 
 .reextFilter .x-panel-header-title-default {
@@ -74,14 +102,14 @@
 }
 
 .reextForm a {
-  width: 100%;
+  width: 97%;
   left: 0 !important;
-  background-color: black;
-  background-image: none;
+  background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
   min-height: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
+  margin-left: 2px !important;
 }
 
 .reextForm a span {
@@ -97,14 +125,14 @@
 }
 
 .reextForm label {
-  color: black;
-  font-weight: 600;
+  color: #00ce9f;
+  font-weight: 400;
   font-size: 14px;
 }
 
 .reextForm .x-form-text-wrap-default,
 .reextForm .input {
-  border: 1px solid black;
+  border: 1px solid #d2c7cb;
   border-radius: 5px;
   height: 25px;
 }
@@ -112,12 +140,11 @@
 .loginContainer,
 .signupContainer,
 .itemContainer {
-  margin-top: 10em;
-  border: 2px solid black;
   border-radius: 8px;
-  padding: 30px;
-  width: 50%;
+  padding-bottom: 10px;
+  width: 40%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background: white;
 }
 
 .allInventoryContainer {
@@ -126,9 +153,7 @@
 }
 
 .filterContainer {
-  border: 2px solid black;
   border-radius: 8px;
-  padding: 30px;
   width: 20%;
   height: 200px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -177,6 +202,10 @@
 }
 .signout-btn:hover {
   text-decoration: underline;
+}
+
+.navBarWrapper {
+  padding: 20px;
 }
 
 @media (max-width: 768px) {

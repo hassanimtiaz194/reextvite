@@ -13,6 +13,7 @@ import Inventory from "./pages/Inventory";
 import AllInventory from "./pages/AllInventory";
 import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
+import Loader from "./components/Loader";
 
 function AppContent() {
   const location = useLocation();
@@ -22,26 +23,22 @@ function AppContent() {
     setIsHome(location.pathname === "/");
   }, [location]);
 
+  const pathnames = ['/add-items', '/signup'];
   return (
     <>
-      <Navbar />
-      <div className={isHome ? "mainOtherContainer" : "mainContainer"}>
+      <div className="navBarWrapper">
+        <Navbar />
+      </div>
+      <div className={isHome ? "mainOtherContainer" : "mainContainer"}
+        style={{ justifyContent: pathnames.includes(location.pathname) ? 'center' : 'normal' }}
+      >
         <Routes>
           <Route path="/" element={<AllInventory />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/admin/add-items"
-            element={<AdminRoute element={<AddItems />} />}
-          />
-          <Route
-            path="/admin/users"
-            element={<AdminRoute element={<Users />} />}
-          />
-          <Route
-            path="/admin/inventory"
-            element={<AdminRoute element={<Inventory />} />}
-          />
+          <Route path="/add-items" element={<AddItems />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/inventory" element={<Inventory />} />
         </Routes>
       </div>
     </>
@@ -53,6 +50,7 @@ function App() {
     <div className="rootContainer">
       <Router>
         <AppContent />
+        <Loader />
       </Router>
     </div>
   );

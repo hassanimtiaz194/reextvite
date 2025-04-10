@@ -1,11 +1,14 @@
 /* Navbar container */
 .navbar {
+  max-height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
   padding: 15px 20px;
   color: white;
+  border-radius: 16px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo styling */
@@ -16,15 +19,26 @@
   font-weight: bold;
 }
 
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
 /* Navigation Links */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
 }
 
 .nav-links li {
   display: inline-block;
+  font-weight: 600;
+  width: 130px;
 }
 
 .nav-links a {
@@ -33,8 +47,12 @@
   font-size: 16px;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+.linkContainer:hover {
+  background-color: white;
+  color: #0dc19d;
+  padding: 6px;
+  border-radius: 10px;
+  height: 30px;
 }
 
 /* Menu Toggle Button (Hidden on large screens) */
@@ -58,9 +76,9 @@
     flex-direction: column;
     width: 100%;
     position: absolute;
-    top: 60px;
+    top: 100px;
     left: 0;
-    background: #333;
+    background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
     padding: 10px 0;
     text-align: center;
   }
@@ -72,5 +90,31 @@
 
   .nav-links li {
     padding: 10px 0;
+  }
+}
+
+.lottie-loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+}
+
+.lottie-player {
+  width: 150px;
+  height: 150px;
+}
+
+@media (max-width: 600px) {
+  .lottie-player {
+    width: 100px;
+    height: 100px;
   }
 }

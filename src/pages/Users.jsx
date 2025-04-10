@@ -78,70 +78,73 @@ const Users = () => {
   return (
     <div className="userContainer">
       {userStats.length !== 0 && (
+        <div className="normalContainer">
+          <ReExt
+            xtype="chart"
+            className="reextChart"
+            config={{
+              width: gridWidth,
+              height: 500,
+              store: userStats, // Directly use updated userStats
+              axes: [
+                {
+                  type: "category",
+                  position: "bottom",
+                  fields: ["year"],
+                  title: "Year",
+                },
+                {
+                  type: "numeric",
+                  position: "left",
+                  fields: ["count"],
+                  title: "Number of Users",
+                  grid: true,
+                },
+              ],
+              series: [
+                {
+                  type: "bar",
+                  xField: "year",
+                  yField: "count",
+                  label: {
+                    display: "insideEnd",
+                    field: "count",
+                    renderer: (value) => value, // To display the count on top of bars
+                  },
+                  style: {
+                    fill: "#4CAF50", // Green color for bars
+                  },
+                },
+              ],
+            }}
+          />
+        </div>
+      )}
+      <div className="normalContainer">
         <ReExt
-          xtype="chart"
-          className="reextForm"
+          key={JSON.stringify(users)} // Add key to force re-render on users data change
+          xtype="grid" // Directly use grid without form
+          className="reextTable"
           config={{
-            title: "Users Joined By Year",
+            title: "Users List",
             width: gridWidth,
-            height: 800,
-            store: userStats, // Directly use updated userStats
-            axes: [
+            height: 500,
+            bodyPadding: 16,
+            store: users, // Ensure that 'users' is properly populated
+            columns: [
+              { text: "Name", dataIndex: "name", width: 200 },
+              { text: "Email", dataIndex: "email", width: 200 },
               {
-                type: "category",
-                position: "bottom",
-                fields: ["year"],
-                title: "Year",
-              },
-              {
-                type: "numeric",
-                position: "left",
-                fields: ["count"],
-                title: "Number of Users",
-                grid: true,
+                text: "Created At",
+                dataIndex: "createdAt",
+                width: "100%",
+                renderer: (value) => formatDate(value), // Format the createdAt field
               },
             ],
-            series: [
-              {
-                type: "bar",
-                xField: "year",
-                yField: "count",
-                label: {
-                  display: "insideEnd",
-                  field: "count",
-                  renderer: (value) => value, // To display the count on top of bars
-                },
-                style: {
-                  fill: "#4CAF50", // Green color for bars
-                },
-              },
-            ],
+            //height: 400,
           }}
         />
-      )}
-      <ReExt
-        key={JSON.stringify(users)} // Add key to force re-render on users data change
-        xtype="grid" // Directly use grid without form
-        className="reextTable"
-        config={{
-          title: "Users List",
-          width: gridWidth,
-          height: 800,
-          bodyPadding: 16,
-          store: users, // Ensure that 'users' is properly populated
-          columns: [
-            { text: "Name", dataIndex: "name", width: 200 },
-            { text: "Email", dataIndex: "email", width: 200 },
-            {
-              text: "Created At",
-              dataIndex: "createdAt",
-              width: "100%",
-              renderer: (value) => formatDate(value), // Format the createdAt field
-            },
-          ],
-          //height: 400,
-        }}
-      />
+      </div>
     </div>
   );
 };

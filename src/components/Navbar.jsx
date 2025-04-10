@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css"; // Import the CSS for styling
+import { Link, useNavigate } from "react-router-dom";
+import "./styles.css";
+import Logo from '../../public/logo.png';
+import { FaHome, FaBox, FaUsers, FaPlusCircle, FaSignInAlt, FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkUser = () => {
@@ -12,14 +15,10 @@ const Navbar = () => {
       setUser(userData ? JSON.parse(userData) : null);
     };
 
-    // Run once on mount
     checkUser();
 
-    // Listen for login/logout changes via storage event (when logged in/out in another tab)
     window.addEventListener("storage", checkUser);
-
-    // Optionally poll every few seconds (in same tab updates)
-    const interval = setInterval(checkUser, 1000); // Poll every 1 second
+    const interval = setInterval(checkUser, 1000);
 
     return () => {
       window.removeEventListener("storage", checkUser);
@@ -33,67 +32,80 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleLinkClick = () => {
+    localStorage.setItem("loading", "true");
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/">MyStore</Link>
+        <Link to="/" onClick={handleLinkClick}>
+          <img
+            src={Logo}
+            alt="Logo"
+            width="45px"
+            height="45px"
+            style={{ borderRadius: '10px' }}
+          />
+        </Link>
       </div>
 
       <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
+        <FaBars size={30} />
       </button>
 
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
         <li>
-          <Link to="/" onClick={() => setMenuOpen(false)}>
-            Home
+          <Link to="/" onClick={handleLinkClick}>
+            <div className="linkContainer">
+              <div paddingTop="10px">
+                <FaHome size={20} />
+              </div>
+              <div>Home</div>
+            </div>
           </Link>
         </li>
-
-        {user && user.userType === "admin" && (
-          <li>
-            <Link to="/admin/inventory" onClick={() => setMenuOpen(false)}>
-              Inventory
-            </Link>
-          </li>
-        )}
-
-        {!user && (
-          <>
-            <li>
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup" onClick={() => setMenuOpen(false)}>
-                Sign Up
-              </Link>
-            </li>
-          </>
-        )}
-
-        {user && user.userType === "admin" && (
-          <>
-            <li>
-              <Link to="/admin/add-items" onClick={() => setMenuOpen(false)}>
-                Add Items
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/users" onClick={() => setMenuOpen(false)}>
-                Users
-              </Link>
-            </li>
-          </>
-        )}
-        {user && (
-          <li>
-            <button className="signout-btn" onClick={handleLogout}>
-              Sign Out
-            </button>
-          </li>
-        )}
+        <li>
+          <Link to="/inventory" onClick={handleLinkClick}>
+            <div className="linkContainer">
+              <div paddingTop="10px">
+                <FaBox size={20} />
+              </div>
+              <div>Inventory</div>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link to="/users" onClick={handleLinkClick}>
+            <div className="linkContainer">
+              <div paddingTop="10px">
+                <FaUsers size={20} />
+              </div>
+              <div>Users</div>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link to="/add-items" onClick={handleLinkClick}>
+            <div className="linkContainer">
+              <div paddingTop="10px">
+                <FaPlusCircle size={20} />
+              </div>
+              <div>Add Items</div>
+            </div>
+          </Link>
+        </li>
+        <li>
+          <Link to="/signup" onClick={handleLinkClick}>
+            <div className="linkContainer">
+              <div paddingTop="10px">
+                <FaSignInAlt size={20} />
+              </div>
+              <div>Sign Up</div>
+            </div>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

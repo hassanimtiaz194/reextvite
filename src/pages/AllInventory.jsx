@@ -6,6 +6,7 @@ import { addDoc } from "firebase/firestore";
 const AllInventory = () => {
   const [items, setItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isHovered, setIsHovered] = useState(null);
 
   const fetchItems = async () => {
     const querySnapshot = await getDocs(collection(db, "items"));
@@ -77,13 +78,17 @@ const AllInventory = () => {
             {filteredItems.map((item, index) => (
               <div
                 key={index}
+                onMouseEnter={() => setIsHovered(index)}
+                onMouseLeave={() => setIsHovered(null)}
                 style={{
                   border: "1px solid #ddd",
                   //padding: "10px",
+                  backgroundColor: 'white',
                   margin: "5px",
                   borderRadius: "5px",
                   textAlign: "center",
                   width: "300px",
+                  boxShadow: isHovered === index ? "0px 4px 10px rgba(0, 0, 0, 0.5)" : "0px 4px 10px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 {/* Item Image */}
