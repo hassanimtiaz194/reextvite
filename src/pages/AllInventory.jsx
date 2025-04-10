@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { db, collection, getDocs } from "../configs/firebaseConfig"; // Import your Firebase config
+import { db, collection, getDocs } from "../configs/firebaseConfig"; // Firebase config
 import ReExt from "@sencha/reext";
 import { addDoc } from "firebase/firestore";
 
 const AllInventory = () => {
   const [items, setItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [isHovered, setIsHovered] = useState(null);
 
   const fetchItems = async () => {
@@ -13,7 +14,7 @@ const AllInventory = () => {
     const itemList = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-      price: parseFloat(doc.data().price), // Ensure price is a number
+      price: parseFloat(doc.data().price),
     }));
     setItems(itemList);
   };
@@ -22,10 +23,13 @@ const AllInventory = () => {
     fetchItems();
   }, []);
 
-  const filteredItems =
-    selectedCategory === "All"
-      ? items
-      : items.filter((item) => item.category === selectedCategory);
+  const filteredItems = items.filter((item) => {
+    const matchCategory =
+      selectedCategory === "All" || item.category === selectedCategory;
+    const matchSubCategory =
+      selectedSubCategory === "" || item.subCategory === selectedSubCategory;
+    return matchCategory && matchSubCategory;
+  });
 
   return (
     <div className="allInventoryContainer">
@@ -45,32 +49,58 @@ const AllInventory = () => {
                 handler: async function () {
                   let form = this.up("form");
                   let values = form.getValues();
-                  let { category } = values;
+                  let { category, subCategory } = values;
                   setSelectedCategory(category);
+                  setSelectedSubCategory(subCategory);
                 },
               },
             ],
             items: [
               {
-                xtype: "combobox", // Dropdown for categories
+                xtype: "combobox",
                 fieldLabel: "Category",
                 name: "category",
                 anchor: "100%",
-                store: ["All", "Electronics", "Clothing", "Books", "Furniture"], // Sample categories
+                store: [
+                  "All",
+                  "Electronics",
+                  "Clothing",
+                  "Furniture",
+                  "Books"
+                ]
+                ,
+              },
+              {
+                xtype: "combobox",
+                fieldLabel: "Sub-Category",
+                name: "subCategory",
+                anchor: "100%",
+                store: [
+                  "Mobile",
+                  "Laptop",
+                  "Accessories",
+                  "T-Shirt",
+                  "Shoes",
+                  "Sweatshirt",
+                  "Chair",
+                  "Table",
+                  "Storage",
+                  "Novel",
+                  "Technical"
+                ]
               },
             ],
           }}
         />
       </div>
 
-      {/* Render filtered items */}
       <div style={{ width: "80%" }}>
         {filteredItems.length !== 0 && (
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
-              paddingBottom: "100px",
+              paddingBottom: "200px",
               justifyContent: "center",
               paddingLeft: 50,
             }}
@@ -82,16 +112,17 @@ const AllInventory = () => {
                 onMouseLeave={() => setIsHovered(null)}
                 style={{
                   border: "1px solid #ddd",
-                  //padding: "10px",
-                  backgroundColor: 'white',
+                  backgroundColor: "white",
                   margin: "5px",
                   borderRadius: "5px",
                   textAlign: "center",
                   width: "300px",
-                  boxShadow: isHovered === index ? "0px 4px 10px rgba(0, 0, 0, 0.5)" : "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                  boxShadow:
+                    isHovered === index
+                      ? "0px 4px 10px rgba(0, 0, 0, 0.5)"
+                      : "0px 4px 10px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                {/* Item Image */}
                 <img
                   src={item.image}
                   alt={item.name}
@@ -102,41 +133,36 @@ const AllInventory = () => {
                   }}
                 />
                 <br />
-                {/* Item Name */}
                 <ReExt
                   xtype="displayfield"
                   className="cardTitle"
-                  style={{
-                    marginBottom: "5px",
-                  }}
-                  config={{ value: `${item.name}` }}
+                  style={{ marginBottom: "5px" }}
+                  config={{ value: `${item.itemName}` }}
                 />
-                {/* Item Price */}
                 <ReExt
                   xtype="displayfield"
                   style={{ marginBottom: "5px", color: "#ff5733" }}
-                  config={{ value: `$ ${item.price}` }}
+                  config={{ value: `$ ${item.itemPrice}` }}
                   className="cardPrice"
                 />
-                {/* Item Category */}
                 <ReExt
                   xtype="displayfield"
                   style={{ marginBottom: "5px", color: "blue" }}
                   config={{ value: `Category: ${item.category}` }}
                   className="cardCategory"
                 />
-                {/* Item Description */}
                 <ReExt
                   xtype="displayfield"
-                  style={{
-                    marginBottom: "5px",
-                  }}
+                  style={{ marginBottom: "5px", color: "green" }}
+                  config={{ value: `Sub-Category: ${item.subCategory || "N/A"}` }}
+                  className="cardSubCategory"
+                />
+                <ReExt
+                  xtype="displayfield"
+                  style={{ marginBottom: "5px" }}
                   className="cardDescription"
                   config={{
-                    value: `Description: ${item.description.substring(
-                      0,
-                      50
-                    )}...`,
+                    value: `Description: ${item.itemDescription.substring(0, 50)}...`,
                   }}
                 />
               </div>

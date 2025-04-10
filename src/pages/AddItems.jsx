@@ -14,7 +14,7 @@ const AddItem = () => {
         config={{
           title: "Add New Item",
           width: 400,
-          height: 400,
+          height: 450,
           bodyPadding: 16,
           buttons: [
             {
@@ -29,14 +29,16 @@ const AddItem = () => {
                     itemPrice,
                     itemDescription,
                     category,
+                    subCategory, // new field
                     itemQuantity,
                   } = values;
-                  const itemRef = doc(db, "items", itemName); // Use item name as document ID for simplicity
+                  const itemRef = doc(db, "items", itemName);
                   await setDoc(itemRef, {
                     name: itemName,
                     price: itemPrice,
                     description: itemDescription,
-                    category: category, // Save the category
+                    category: category,
+                    subCategory: subCategory, // save subcategory
                     itemQuantity: itemQuantity,
                     image:
                       "https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png",
@@ -92,15 +94,37 @@ const AddItem = () => {
               allowBlank: false,
             },
             {
-              xtype: "combobox", // Dropdown for categories
+              xtype: "combobox",
               fieldLabel: "Category",
               name: "category",
               anchor: "100%",
-              store: ["Electronics", "Clothing", "Books", "Furniture"], // Sample categories
+              store: ["Electronics", "Clothing", "Books", "Furniture"],
+              allowBlank: false,
+            },
+            {
+              xtype: "combobox",
+              fieldLabel: "Sub Category",
+              name: "subCategory",
+              anchor: "100%",
+              store: [
+                "Mobile",
+                "Laptop",
+                "Accessories",
+                "T-Shirt",
+                "Shoes",
+                "Sweatshirt",
+                "Chair",
+                "Table",
+                "Storage",
+                "Novel",
+                "Technical"
+              ],
+              allowBlank: false,
             },
           ],
         }}
       />
+
       {/* Link to Items List or Admin Dashboard */}
       <p style={{ textAlign: "center", marginTop: "10px" }}>
         <Link to="/admin/users">Back</Link>
