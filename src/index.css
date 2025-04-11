@@ -173,18 +173,39 @@
   font-size: 16px;
   font-weight: 800;
 }
+.cardTitle > div:nth-of-type(2) {
+  display: none !important;
+}
+
 .cardPrice .x-form-display-field-default {
   font-size: 19px;
   font-weight: 800;
 }
+.cardPrice > div:nth-of-type(2) {
+  display: none !important;
+}
+
 .cardCategory .x-form-display-field-default {
   font-size: 12px;
   font-weight: 200;
 }
+
+.cardCategory > div:nth-of-type(2) {
+  display: none !important;
+}
+
 .cardDescription .x-form-display-field-default {
   font-size: 14px;
   font-weight: 500;
   padding: 10px;
+}
+
+.cardDescription > div:nth-of-type(2) {
+  display: none !important;
+}
+
+.ReExtRoot-form > div:nth-of-type(2) {
+  display: none !important;
 }
 
 .userContainer {
@@ -222,7 +243,7 @@
 .renderTotal {
   display: flex;
   flex-direction: row;
-  gap:16px;
+  gap: 16px;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -237,7 +258,15 @@
   min-width: 150px;
   height: 100px;
   border-radius: 8px;
-  gap:16px;
+  gap: 16px;
+}
+
+div[name="ReExtRoot-displayfield"] {
+  display: none !important;
+}
+
+.x-panel-header-title-default > .x-title-text-default:after {
+  display: none;
 }
 
 @media (max-width: 768px) {
