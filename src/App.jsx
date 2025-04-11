@@ -19,6 +19,7 @@ function AppContent() {
   const location = useLocation();
   const [isHome, setIsHome] = useState(false);
 
+  
   useEffect(() => {
     setIsHome(location.pathname === "/");
   }, [location]);

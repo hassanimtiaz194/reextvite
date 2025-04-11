@@ -240,6 +240,10 @@
   gap:16px;
 }
 
+.x-panel-header-title-default > .x-title-text-default:after {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .loginContainer,
   .signupContainer,

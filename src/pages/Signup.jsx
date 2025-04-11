@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReExt from "@sencha/reext";
 import {
   createUserWithEmailAndPassword,
@@ -11,6 +11,26 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const targets = [
+      'ReExt displayfield',
+      'ReExt form',
+      'ReExt grid',
+      'ReExt polar',
+      'ReExt combobox',
+      'ReExt chart',
+    ];
+  
+    const divs = document.querySelectorAll('div');
+    for (let div of divs) {
+      if (targets.includes(div.textContent.trim())) {
+        div.style.display = 'none';
+      }
+    }
+  }, []);
+
+  
   return (
     <div className="signupContainer">
       <ReExt

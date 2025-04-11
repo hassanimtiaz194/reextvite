@@ -9,6 +9,25 @@ const AllInventory = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [isHovered, setIsHovered] = useState(null);
 
+  useEffect(() => {
+    const targets = [
+      'ReExt displayfield',
+      'ReExt form',
+      'ReExt grid',
+      'ReExt polar',
+      'ReExt combobox',
+      'ReExt chart',
+    ];
+  
+    const divs = document.querySelectorAll('div');
+    for (let div of divs) {
+      if (targets.includes(div.textContent.trim())) {
+        div.style.display = 'none';
+      }
+    }
+  }, []);
+  
+
   const fetchItems = async () => {
     const querySnapshot = await getDocs(collection(db, "items"));
     const itemList = querySnapshot.docs.map((doc) => ({
