@@ -190,6 +190,7 @@ const InventoryPage = () => {
                   <div>
                     <ReExt
                       xtype="combobox"
+                      className="reextCombo"
                       config={{
                         name: "category",
                         store: ["Electronics", "Clothing", "Furniture", "Books"],

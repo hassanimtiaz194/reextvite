@@ -200,11 +200,21 @@
   padding: 10px;
 }
 
+.cardSubCategory > div:nth-of-type(2) {
+  display: none !important;
+}
+
 .cardDescription > div:nth-of-type(2) {
   display: none !important;
 }
 
-.ReExtRoot-form > div:nth-of-type(2) {
+.reextForm  > div:nth-of-type(2) {
+  display: none !important;
+}
+
+.reextTable > div:nth-of-type(2),
+.reextChart > div:nth-of-type(2),
+.reextCombo > div:nth-of-type(2)  {
   display: none !important;
 }
 
