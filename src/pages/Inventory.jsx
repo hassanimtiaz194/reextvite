@@ -12,25 +12,6 @@ const InventoryPage = () => {
   );
 
   useEffect(() => {
-    const targets = [
-      'ReExt displayfield',
-      'ReExt form',
-      'ReExt grid',
-      'ReExt polar',
-      'ReExt combobox',
-      'ReExt chart',
-    ];
-  
-    const divs = document.querySelectorAll('div');
-    for (let div of divs) {
-      if (targets.includes(div.textContent.trim())) {
-        div.style.display = 'none';
-      }
-    }
-  }, []);
-  
-
-  useEffect(() => {
     const handleResize = () => {
       setGridWidth(window.innerWidth <= 768 ? 300 : 800);
     };
