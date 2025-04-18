@@ -147,25 +147,31 @@ const InventoryPage = () => {
                 config={{
                   title: "Items by Category",
                   width: gridWidth,
-                  height: 250,
-                  insetPadding: 50,
+                  height: 300, // Increased height
+                  insetPadding: 40,
                   interactions: ["rotate", "itemhighlight"],
+                  legend: {
+                    docked: "right", // Add legend for clarity
+                  },
                   store: {
                     fields: ["category", "count"],
-                    data: itemStats.filter((item) => item.count > 0), // Remove categories with 0 count
+                    data: itemStats.filter((item) => item.count > 0),
                   },
                   series: [
                     {
                       type: "pie",
                       angleField: "count",
-                      donut: 30, // Donut chart effect
+                      donut: 30,
                       label: {
                         field: "category",
-                        display: "rotate", // Ensure labels are readable
-                        contrast: true,
+                        display: "outside", // Moved outside for visibility
+                        calloutLine: {
+                          length: 20,
+                          width: 2,
+                        },
                       },
                       highlight: true,
-                      colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A1"], // Assign colors to categories
+                      colors: ["#DEE2FC", "#C0A9BC", "#B92B3F", "#049977"], // Fixed color
                       tooltip: {
                         trackMouse: true,
                         renderer: (tooltip, record) => {
@@ -178,6 +184,7 @@ const InventoryPage = () => {
                   ],
                 }}
               />
+
             </div>
             <div className="normalContainer" style={{ minHeight: '200px', padding: '30px' }}>
               <div>

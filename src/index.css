@@ -45,8 +45,7 @@
   padding-bottom: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   background: white;
-  padding: 10px;
-  max-width: 720px;
+  max-width: 750px;
 }
 
 .reextTable .x-panel-header {
@@ -208,13 +207,13 @@
   display: none !important;
 }
 
-.reextForm  > div:nth-of-type(2) {
+.reextForm > div:nth-of-type(2) {
   display: none !important;
 }
 
 .reextTable > div:nth-of-type(2),
 .reextChart > div:nth-of-type(2),
-.reextCombo > div:nth-of-type(2)  {
+.reextCombo > div:nth-of-type(2) {
   display: none !important;
 }
 
@@ -279,15 +278,14 @@
   .loginContainer,
   .signupContainer,
   .itemContainer {
-    margin-top: 10em;
     width: 80%;
-    padding: 20px;
   }
   .allInventoryContainer {
     flex-direction: column;
+    align-items: center;
   }
   .filterContainer {
-    width: 80%;
+    width: 90%;
   }
   .userContainer {
     flex-direction: column;

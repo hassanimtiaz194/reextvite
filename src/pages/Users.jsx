@@ -112,7 +112,7 @@ const Users = () => {
                     renderer: (value) => value, // To display the count on top of bars
                   },
                   style: {
-                    fill: "#4CAF50", // Green color for bars
+                    fill: "#049977", // Green color for bars
                   },
                 },
               ],
