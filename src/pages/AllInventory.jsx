@@ -98,7 +98,7 @@ const AllInventory = () => {
           }}
         />
       </div>
-      <div style={{ width: "60%", flexGrow: 1 }}>
+      <div className="allInventoryContainerss">
         {filteredItems.length > 0 ? (
           <>
             <Swiper

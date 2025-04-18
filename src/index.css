@@ -70,6 +70,11 @@
   border-radius: 8px;
 }
 
+.allInventoryContainerss {
+  width: 60%;
+  flex-grow: 1;
+}
+
 .reextForm .x-panel-header {
   background-image: linear-gradient(270deg, #08d88d, #0eb5a3);
   height: 300px;
@@ -279,6 +284,9 @@
   .signupContainer,
   .itemContainer {
     width: 80%;
+  }
+  .allInventoryContainerss {
+    width: 100%;
   }
   .allInventoryContainer {
     flex-direction: column;
