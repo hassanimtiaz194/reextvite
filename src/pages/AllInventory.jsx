@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db, collection, getDocs } from "../configs/firebaseConfig"; // Firebase config
+import { db, collection, getDocs } from "../configs/firebaseConfig";
 import { addDoc } from "firebase/firestore";
 import ReExt from "@sencha/reext";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,6 +14,9 @@ const AllInventory = () => {
   const [isHovered, setIsHovered] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
+  const [isTabletView, setIsTabletView] = useState(
+    window.innerWidth >= 768 && window.innerWidth < 1024
+  );
   const itemsPerPage = 9;
 
   const fetchItems = async () => {
@@ -31,7 +34,10 @@ const AllInventory = () => {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => setIsMobileView(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 768);
+      setIsTabletView(window.innerWidth >= 768 && window.innerWidth < 1024);
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -60,8 +66,8 @@ const AllInventory = () => {
         border: "1px solid #ddd",
         backgroundColor: "white",
         margin: "5px auto",
-        minHeight: '420px',
-        maxHeight: '420px',
+        minHeight: "420px",
+        maxHeight: "420px",
         borderRadius: "8px",
         textAlign: "center",
         width: "90%",
@@ -71,7 +77,7 @@ const AllInventory = () => {
             : "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <div style={{height:'250px', maxHeight: '250px'}}>
+      <div style={{ height: "250px", maxHeight: "250px" }}>
         <img
           src={item.image}
           alt={item.itemName}
@@ -110,7 +116,10 @@ const AllInventory = () => {
   );
 
   return (
-    <div className="allInventoryContainer" style={{ gap: "16px", display: "flex", paddingBottom: "16em" }}>
+    <div
+      className="allInventoryContainer"
+      style={{ gap: "16px", display: "flex", paddingBottom: "16em" }}
+    >
       <div className="filterContainer">
         <ReExt
           xtype="form"
@@ -128,7 +137,7 @@ const AllInventory = () => {
                   const { category, subCategory } = form.getValues();
                   setSelectedCategory(category);
                   setSelectedSubCategory(subCategory);
-                  setCurrentPage(1); // reset to first page on filter
+                  setCurrentPage(1);
                 },
               },
             ],
@@ -183,7 +192,7 @@ const AllInventory = () => {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gridTemplateColumns: isTabletView ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
                   gap: "20px",
                   padding: "10px",
                 }}

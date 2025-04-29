@@ -171,6 +171,7 @@
   font-size: 16px;
   font-weight: 800;
   background: white;
+  min-width: 200px;
 }
 
 .cardTitle .x-form-display-field-default {
