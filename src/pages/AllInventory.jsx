@@ -13,7 +13,8 @@ const AllInventory = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [isHovered, setIsHovered] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
+  const itemsPerPage = 9;
 
   const fetchItems = async () => {
     const querySnapshot = await getDocs(collection(db, "items"));
@@ -27,6 +28,12 @@ const AllInventory = () => {
 
   useEffect(() => {
     fetchItems();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobileView(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const filteredItems = items.filter((item) => {
@@ -44,8 +51,66 @@ const AllInventory = () => {
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 
+  const renderCard = (item, index) => (
+    <div
+      key={item.id}
+      onMouseEnter={() => setIsHovered(index)}
+      onMouseLeave={() => setIsHovered(null)}
+      style={{
+        border: "1px solid #ddd",
+        backgroundColor: "white",
+        margin: "5px auto",
+        minHeight: '420px',
+        maxHeight: '420px',
+        borderRadius: "8px",
+        textAlign: "center",
+        width: "90%",
+        boxShadow:
+          isHovered === index
+            ? "0px 4px 12px rgba(0, 0, 0, 0.3)"
+            : "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <div style={{height:'250px', maxHeight: '250px'}}>
+        <img
+          src={item.image}
+          alt={item.itemName}
+          style={{ width: "100%", height: "100%", borderRadius: "8px 8px 0 0" }}
+        />
+      </div>
+      <div style={{ padding: "10px" }}>
+        <ReExt xtype="displayfield" className="cardTitle" config={{ value: `${item.itemName}` }} />
+        <ReExt
+          xtype="displayfield"
+          style={{ color: "#ff5733" }}
+          className="cardPrice"
+          config={{ value: `$${item.itemPrice}` }}
+        />
+        <ReExt
+          xtype="displayfield"
+          style={{ color: "blue" }}
+          className="cardCategory"
+          config={{ value: `Category: ${item.category}` }}
+        />
+        <ReExt
+          xtype="displayfield"
+          style={{ color: "green" }}
+          className="cardSubCategory"
+          config={{ value: `Sub-Category: ${item.subCategory || "N/A"}` }}
+        />
+        <ReExt
+          xtype="displayfield"
+          className="cardDescription"
+          config={{
+            value: `Description: ${item.itemDescription?.substring(0, 50) ?? ""}...`,
+          }}
+        />
+      </div>
+    </div>
+  );
+
   return (
-    <div className="allInventoryContainer" style={{ flexWrap: "wrap", gap: "16px", display: "flex" }}>
+    <div className="allInventoryContainer" style={{ gap: "16px", display: "flex", paddingBottom: "16em" }}>
       <div className="filterContainer">
         <ReExt
           xtype="form"
@@ -98,80 +163,37 @@ const AllInventory = () => {
           }}
         />
       </div>
-      <div className="allInventoryContainerss">
+
+      <div className="allInventoryContainerss" style={{ width: "100%" }}>
         {filteredItems.length > 0 ? (
           <>
-            <Swiper
-              spaceBetween={10}
-              slidesPerView={window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3}
-              pagination={{ clickable: true }}
-              modules={[Pagination]}
-              style={{ paddingBottom: "50px" }}
-            >
-              {paginatedItems.map((item, index) => (
-                <SwiperSlide key={item.id}>
-                  <div
-                    onMouseEnter={() => setIsHovered(index)}
-                    onMouseLeave={() => setIsHovered(null)}
-                    style={{
-                      border: "1px solid #ddd",
-                      backgroundColor: "white",
-                      margin: "5px auto",
-                      minHeight: '390px',
-                      maxHeight: '390px',
-                      borderRadius: "8px",
-                      textAlign: "center",
-                      width: "90%",
-                      boxShadow:
-                        isHovered === index
-                          ? "0px 4px 12px rgba(0, 0, 0, 0.3)"
-                          : "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                    }}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.itemName}
-                      style={{ width: "100%", height: 200, borderRadius: "8px 8px 0 0", objectFit: "cover" }}
-                    />
-                    <div style={{ padding: "10px" }}>
-                      <ReExt
-                        xtype="displayfield"
-                        className="cardTitle"
-                        config={{ value: `${item.itemName}` }}
-                      />
-                      <ReExt
-                        xtype="displayfield"
-                        style={{ color: "#ff5733" }}
-                        className="cardPrice"
-                        config={{ value: `$${item.itemPrice}` }}
-                      />
-                      <ReExt
-                        xtype="displayfield"
-                        style={{ color: "blue" }}
-                        className="cardCategory"
-                        config={{ value: `Category: ${item.category}` }}
-                      />
-                      <ReExt
-                        xtype="displayfield"
-                        style={{ color: "green" }}
-                        className="cardSubCategory"
-                        config={{ value: `Sub-Category: ${item.subCategory || "N/A"}` }}
-                      />
-                      <ReExt
-                        xtype="displayfield"
-                        className="cardDescription"
-                        config={{
-                          value: `Description: ${item.itemDescription?.substring(0, 50) ?? ""}...`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {isMobileView ? (
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                pagination={{ clickable: true }}
+                modules={[Pagination]}
+                style={{ paddingBottom: "50px" }}
+              >
+                {paginatedItems.map((item, index) => (
+                  <SwiperSlide key={item.id}>{renderCard(item, index)}</SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: "20px",
+                  padding: "10px",
+                }}
+              >
+                {paginatedItems.map((item, index) => renderCard(item, index))}
+              </div>
+            )}
 
             {/* Pagination */}
-            <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 20 }}>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}

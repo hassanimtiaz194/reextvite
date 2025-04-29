@@ -164,7 +164,11 @@ const InventoryPage = () => {
                       donut: 30,
                       label: {
                         field: "category",
-                        display: "outside", // Moved outside for visibility
+                        display: "inside", // Moved outside for visibility
+                        style: {
+                          fill: "#ffffff", // White label color
+                          fontWeight: "bold", // Optional: to make it more readable
+                        },
                         calloutLine: {
                           length: 20,
                           width: 2,
