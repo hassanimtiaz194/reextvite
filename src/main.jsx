@@ -36,9 +36,7 @@ reactroot.render(
     <ReExtProvider
       ReExtData={ReExtData}
       splash={false}
-      reextkey={
-        "TU5RRGZrek9nUXUyNHVvUExOTHZLTk9iT2tCMXBNM1JGUFNkdW95SFgydS45ZEROeUlUT3lZRE4zRWpPaUFIZWxKQ0xpTTNhd3AzTWxwMloxQUhOM2RYWWxwbmJ3Z0dOaGxYY3FGRE1mUldhc0ppT2lJV2R6SnllLjlKaU4xSXpVSUppT2ljR2JoSnll"
-      }
+      reextkey={import.meta.env.VITE_REEXT_KEY}
     >
       <App />
     </ReExtProvider>
